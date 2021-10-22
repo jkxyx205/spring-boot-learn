@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View</title>
+</head>
+<body>
+<h1 th:text="'hello: ' + ${hello}"></h1>
+<h1 th:text="'world: ' + ${world}"></h1>
+<h1 th:text="${'personForm.name: ' +  personForm.name}"></h1>
+<h1 th:text="${'personForm.age: ' + personForm.age}"></h1>
+<h1 th:text="${'address: ' + address}"></h1>
+<h1 th:text="${'code: ' + code}"></h1>
+<h1 th:text="${'map == model.asMap(): ' + eq}"></h1>
+
+<hr>
+<form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" /></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td><input type="text" th:field="*{age}" /></td>
+            <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
