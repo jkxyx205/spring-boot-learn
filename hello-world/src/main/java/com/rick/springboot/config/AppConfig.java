@@ -1,6 +1,7 @@
 package com.rick.springboot.config;
 
 import com.rick.common.http.exception.ApiExceptionHandler;
+import com.rick.common.http.web.config.EnableResultWrapped;
 import com.rick.common.validate.ServiceMethodValidationInterceptor;
 import com.rick.common.validate.ValidatorHelper;
 import com.rick.springboot.model.Cat;
@@ -19,6 +20,7 @@ import javax.validation.Validator;
  */
 @Configuration(proxyBeanMethods = true)
 @Import({ApiExceptionHandler.class, ServiceMethodValidationInterceptor.class})
+@EnableResultWrapped
 @RequiredArgsConstructor
 public class AppConfig {
 

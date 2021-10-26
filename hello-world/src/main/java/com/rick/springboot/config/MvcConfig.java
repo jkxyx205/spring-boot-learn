@@ -78,16 +78,16 @@ public class MvcConfig implements WebMvcConfigurer {
 //        handlers.add(myHandlerMethodReturnValueHandler());
     }
 
-    @Autowired
-    public void setMyHandlerMethodReturnValueHandler() {
-        List<HandlerMethodReturnValueHandler> defaultHandlerMethodReturnValueHandler = requestMappingHandlerAdapter.getReturnValueHandlers();
-
-        List<HandlerMethodReturnValueHandler> resolvers = new ArrayList<>();
-        resolvers.addAll(defaultHandlerMethodReturnValueHandler);
-      // 可以调整的Handler的顺序，自定义的放到RequestResponseBodyMethodProcessor之前去
-        resolvers.add(2, myHandlerMethodReturnValueHandler());
-        requestMappingHandlerAdapter.setReturnValueHandlers(resolvers);
-    }
+//    @Autowired
+//    public void setMyHandlerMethodReturnValueHandler() {
+//        List<HandlerMethodReturnValueHandler> defaultHandlerMethodReturnValueHandler = requestMappingHandlerAdapter.getReturnValueHandlers();
+//
+//        List<HandlerMethodReturnValueHandler> resolvers = new ArrayList<>();
+//        resolvers.addAll(defaultHandlerMethodReturnValueHandler);
+//      // 可以调整的Handler的顺序，自定义的放到RequestResponseBodyMethodProcessor之前去
+//        resolvers.add(11, myHandlerMethodReturnValueHandler());
+//        requestMappingHandlerAdapter.setReturnValueHandlers(resolvers);
+//    }
 
     private HandlerMethodReturnValueHandler myHandlerMethodReturnValueHandler() {
         return new HandlerMethodReturnValueHandler() {
@@ -121,8 +121,12 @@ public class MvcConfig implements WebMvcConfigurer {
 
             @Override
             public void handleReturnValue(Object o, MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest) throws Exception {
-                handler.handleReturnValue(o, methodParameter, modelAndViewContainer, nativeWebRequest);
-                System.out.println("MethodReturnValueHandler: HandlerMethodReturnValueHandler 执行 " + o);
+//                Object wrapperObject = (o instanceof Result || methodParameter.hasMethodAnnotation(NotWrapped.class)) ? o : ResultUtils.success(o);
+//                handler.handleReturnValue(wrapperObject, methodParameter, modelAndViewContainer, nativeWebRequest);
+                // AbstractMessageConverterMethodProcessor 这个处理ResponseBody的核心类
+                // genericConverter.write(body, targetType, selectedMediaType, outputMessage);
+                // genericConverter <- MappingJackson2HttpMessageConverter
+//                System.out.println("MethodReturnValueHandler: HandlerMethodReturnValueHandler 执行 " + o);
             }
         };
     }

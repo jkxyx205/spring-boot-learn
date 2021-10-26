@@ -8,7 +8,9 @@
     <title>View</title>
 </head>
 <body>
+<h1 th:text="'request attribute hello: ' + ${#request.getAttribute('hello')}"></h1>
 <h1 th:text="'hello: ' + ${hello}"></h1>
+
 <h1 th:text="'world: ' + ${world}"></h1>
 <h1 th:text="${'personForm.name: ' +  personForm.name}"></h1>
 <h1 th:text="${'personForm.age: ' + personForm.age}"></h1>

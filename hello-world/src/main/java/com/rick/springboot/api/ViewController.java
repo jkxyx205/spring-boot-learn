@@ -1,6 +1,10 @@
 package com.rick.springboot.api;
 
+import com.rick.common.http.web.annotation.UnWrapped;
+import com.rick.springboot.model.User;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +30,10 @@ public class ViewController {
         return mv;
     }
 
+    /**
+     * 优先级 ModelAndView > @ResponseBody > ViewName
+     * @return
+     */
     @GetMapping("view2")
     public ModelAndView view2() {
         ModelAndView mv = new ModelAndView();
@@ -46,4 +54,39 @@ public class ViewController {
         return mv;
     }
 
+    @GetMapping("view3")
+    public Model view3(Model model) {
+        model.addAttribute("q", "q");
+        return model;
+    }
+
+    @GetMapping("view4")
+    @ModelAttribute("s")
+    public String modelAttributeView() {
+        return "sqr";
+    }
+
+    @GetMapping("exception")
+    @ModelAttribute("s")
+    public String exception() {
+        int a  = 1 / 0;
+        return "sqr";
+    }
+
+    @GetMapping(value = "view5")
+    public String view5() {
+        return "view5";
+    }
+
+
+    @GetMapping(value = "view6")
+    public User view6() {
+        return new User();
+    }
+
+    @GetMapping(value = "view7")
+    @UnWrapped
+    public User view7() {
+        return new User();
+    }
 }
