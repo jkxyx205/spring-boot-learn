@@ -1,4 +1,4 @@
-package com.rick.spring.mvc.filter;
+package com.rick.spring.mvc.controller;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
